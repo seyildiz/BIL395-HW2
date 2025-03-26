@@ -1,13 +1,11 @@
 :- dynamic(variable/2).
 
-% Entry point
 start :-
     write('Simple Calculator in Prolog'), nl,
     write('Type "quit." to exit. Do not forget to add . in the end of the line.'), nl,
     calc_loop,
     true.
 
-% Interactive input loop with end-of-file check
 calc_loop :-
     write('Calc> '),
     read(Input),
@@ -19,10 +17,6 @@ calc_loop :-
           calc_loop
     ).
 
-% Process the user input:
-% If the input is an assignment (e.g., X = 3+2),
-% evaluate the expression, store the variable, and print the result.
-% Otherwise, evaluate it as an expression.
 process(Input) :-
     ( Input = (Var = Expr)
       -> eval(Expr, Value),
@@ -33,25 +27,19 @@ process(Input) :-
          format('Result: ~w~n', [Value])
     ).
 
-% Evaluate arithmetic expressions
-
-% A number evaluates to itself.
 eval(Number, Number) :-
     number(Number).
 
-% If the expression is a variable (atom), look it up in our dynamic storage.
 eval(Var, Value) :-
     atom(Var),
     variable(Var, Value),
     !.
-% If a variable is referenced but not assigned, signal an error.
 eval(Var, _) :-
     atom(Var),
     \+ variable(Var, _),
     format('Error: variable ~w not defined.~n', [Var]),
     fail.
 
-% Evaluate a binary arithmetic operation.
 eval(Expr, Value) :-
     Expr =.. [Op, Left, Right],
     member(Op, ['+', '-', '*', '/']),
@@ -59,7 +47,6 @@ eval(Expr, Value) :-
     eval(Right, RVal),
     compute(Op, LVal, RVal, Value).
 
-% Compute the result of a binary operation.
 compute('+', L, R, Value) :- Value is L + R.
 compute('-', L, R, Value) :- Value is L - R.
 compute('*', L, R, Value) :- Value is L * R.
@@ -69,5 +56,4 @@ compute('/', L, R, Value) :-
       ;  Value is L / R
     ).
 
-% Automatically start the calculator when the file is loaded.
 :- initialization(start).
