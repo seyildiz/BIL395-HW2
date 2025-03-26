@@ -1,6 +1,6 @@
 # BIL395-HW2
 
-This github repository includes 2024-2025 Spring BIL395-Programming Language course's second homework. In this homework, I implemented simple calculator that includes variables, assigments, simple arithmetics and simple error handling with five different language. In repository, you can find calculator.pl, calc.pl (since Prolog and Perl have same extension I named Prolog one as calc), calculator.rs, calculator.scm, calculator.adb and test_cases.txt for checking my calculators's accuracy. Below you can find implementation decisions, simple code structure explanation, running and output of the programs for each language. All calculators takes inlines expressions, do not care about whitespaces and can result and operate floating point numbers.
+This github repository includes 2024-2025 Spring BIL395-Programming Language course's second homework. In this homework, I implemented simple calculator that includes variables, assigments, simple arithmetics and simple error handling with five different languages. In this repository, you can find calculator.pl, calc.pl (since Prolog and Perl have same extension I named Prolog one as calc), calculator.rs, calculator.scm, calculator.adb and test_cases.txt for checking my calculators's accuracy. Below you can find expanations about implementation decisions, simple code structures, running and output of the program for each language. All calculators takes inline expressions, do not care about whitespaces and can both result and operate floating point numbers.
 
 # Rust
 
@@ -36,7 +36,7 @@ Output of code:
 
 This Scheme code implements a straightforward REPL (Read–Evaluate–Print Loop) calculator. In the calculator function, the user is prompted for input, which is then split into tokens by `tokenize`. These tokens are processed by `parse`. The code stores variables in a list, with lookup retrieving existing values and store adding new ones or updating existing entries. The `evaluate` function then interprets the expression tree, performing basic arithmetic or defining variables if an assignment operator (=) is encountered. While it correctly handles symbol lookups and simple arithmetic (+, –, *, /), it does not implement operator precedence or parenthesized expressions. Any badly formed input or undefined variable access is caught by a `with-exception-handler` block, generating an error message without halting the program. These simple error handling includes Invalid Expression, Division By Zero, Unknown Variable.
 
-For compiling I tried various compilers that includes racket, mit-scheme, online compilers however, they do not work. Lastly, I was able to compile and took output in online compiler jdoodle. You can access it via https://www.jdoodle.com/execute-scheme-online.
+For compiling I tried various compilers such as racket, mit-scheme, online compilers etc. however, they do not work. Lastly, I was able to compile and took output in online compiler jdoodle. You can access it via https://www.jdoodle.com/execute-scheme-online.
 
 Output of code:
 
@@ -46,7 +46,7 @@ Output of code:
 
 This Prolog code implements a simple interactive calculator in Prolog. The main entry point is `start/0`, which prints an introduction and then calls `calc_loop/0`. Within the loop, the program reads user input, checks for a quit or end-of-file condition, and otherwise delegates to `process/1` to either handle an assignment or evaluate an expression. Variable assignments are stored dynamically with `variable/2`, allowing reassignment. The core expression evaluation is implemented by `eval/2`, which handles numbers directly, resolves variable references and reports an error if a variable is undefined, and recursively processes binary operations by breaking them down (Expr =.. [Op, Left, Right]) and delegating to `compute/4`. Division by zero triggers an error message and a fail to prevent proceeding with an invalid result. This code detects many other errors however, only gives error message to Division By Zero, Variable Not Defined.
 
-Unfortunately online editors so not support Prolog. Thus I installed swi-prolog to run the code. Below is a steps to run the code. 
+Unfortunately online editors do not support Prolog. Thus, I installed swi-prolog to run the code. Remember to end every line with a period ('.') so that SWI-Prolog can correctly parse and execute your input. Below are the steps to run the code.
 
 Open terminal and cd to the directory where prolog file is.
 swipl
