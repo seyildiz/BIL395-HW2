@@ -1,6 +1,6 @@
 # BIL395-HW2
 
-This github repository includes 2024-2025 Spring BIL395-Programming Language course's second homework. In this homework, I implemented simple calculator that includes variables, assigments, simple arithmetics and simple error handling with five different language. In repository, you can find calculator.pl, calc.pl (since Prolog and Perl have same extension I named Prolog one as calc), calculator.rs, calculator.scm, calculator.adb and test_cases.txt for checking my calculators's accuracy. Below you can find implementation decisions, simple code structure explanation, running and output of the programs for each language. All calculators takes inlines expressions and do not care about whitespaces.
+This github repository includes 2024-2025 Spring BIL395-Programming Language course's second homework. In this homework, I implemented simple calculator that includes variables, assigments, simple arithmetics and simple error handling with five different language. In repository, you can find calculator.pl, calc.pl (since Prolog and Perl have same extension I named Prolog one as calc), calculator.rs, calculator.scm, calculator.adb and test_cases.txt for checking my calculators's accuracy. Below you can find implementation decisions, simple code structure explanation, running and output of the programs for each language. All calculators takes inlines expressions, do not care about whitespaces and can result and operate floating point numbers.
 
 # Rust
 
@@ -33,6 +33,14 @@ Output of code:
 <img width="374" alt="image" src="https://github.com/user-attachments/assets/286cdc1e-83f3-4ce3-844f-fe499c91e5ea" />
 
 # Scheme
+
+This Scheme code implements a straightforward REPL (Read–Evaluate–Print Loop) calculator. In the calculator function, the user is prompted for input, which is then split into tokens by `tokenize`. These tokens are processed by `parse`. The code stores variables in a list, with lookup retrieving existing values and store adding new ones or updating existing entries. The `evaluate` function then interprets the expression tree, performing basic arithmetic or defining variables if an assignment operator (=) is encountered. While it correctly handles symbol lookups and simple arithmetic (+, –, *, /), it does not implement operator precedence or parenthesized expressions. Any badly formed input or undefined variable access is caught by a `with-exception-handler` block, generating an error message without halting the program. These simple error handling includes Invalid Expression, Division By Zero, Unknown Variable.
+
+For compiling I tried various compilers that includes racket, mit-scheme, online compilers however, they do not work. Lastly, I was able to compile and took output in online compiler jdoodle. You can access it via https://www.jdoodle.com/execute-scheme-online.
+
+Output of code:
+
+<img width="253" alt="image" src="https://github.com/user-attachments/assets/8bfb5216-6d3f-4bc3-8157-5b51379637f6" />
 
 # Prolog
 
