@@ -3,7 +3,6 @@ with Ada.Float_Text_IO;        use Ada.Float_Text_IO;
 
 procedure Calculator is
 
-   -- Token kinds for numbers, identifiers, operators, etc.
    type Token_Kind is (
       tk_Number, tk_Plus, tk_Minus, tk_Times, tk_Divide,
       tk_LParen, tk_RParen, tk_Identifier, tk_Assign,
@@ -16,13 +15,11 @@ procedure Calculator is
       Id_Text : String(1..32) := (others => ' ');
    end record;
 
-   -- Global parsing state
    Input_Line    : String (1 .. 256);
    Len           : Natural;
    Pos           : Natural := 1;
    Current_Token : Token;
 
-   -- Skip whitespace characters
    procedure Skip_Whitespace is
    begin
       while (Pos <= Len) and then
@@ -33,7 +30,6 @@ procedure Calculator is
       end loop;
    end Skip_Whitespace;
 
-   -- Tokenizer: returns the next token from the input string.
    function Get_Token return Token is
       Tok      : Token;
       Start_Pos: Natural;
@@ -98,15 +94,11 @@ procedure Calculator is
       return Tok;
    end Get_Token;
 
-   -- Advance to the next token.
    procedure Advance_Token is
    begin
       Current_Token := Get_Token;
    end Advance_Token;
 
-   ----------------------------------------------------------------
-   -- Variable Storage (fixed-size array acting as a dictionary)
-   ----------------------------------------------------------------
    type Var_Record is record
       Name  : String(1..32);
       Value : Float;
@@ -151,13 +143,6 @@ procedure Calculator is
       end if;
    end Set_Variable;
 
-   ----------------------------------------------------------------
-   -- Recursive Descent Parser Functions
-   -- Grammar:
-   --   Expression  ::= Term { ("+" | "-") Term }
-   --   Term        ::= Factor { ("*" | "/") Factor }
-   --   Factor      ::= Number | Identifier | "(" Expression ")" | "-" Factor
-   ----------------------------------------------------------------
    function Parse_Expression return Float;
    function Parse_Term return Float;
    function Parse_Factor return Float;
@@ -229,7 +214,6 @@ procedure Calculator is
       return Result;
    end Parse_Expression;
 
-   -- Temporary variables for the interactive loop.
    Temp       : Token;
    Expr_Value : Float;
 
@@ -255,7 +239,6 @@ begin
             Ada.Float_Text_IO.Put(Item => Expr_Value, Fore => 0, Aft => 5, Exp => 0);
             New_Line;
          else
-            -- Not an assignment; treat as an expression.
             Pos := 1;
             Advance_Token;
             Expr_Value := Parse_Expression;
