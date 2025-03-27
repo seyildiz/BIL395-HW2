@@ -1,4 +1,4 @@
-# BIL395-HW2
+# BIL395-HW2 - Su Eda YILDIZ
 
 This github repository includes 2024-2025 Spring BIL395-Programming Language course's second homework. In this homework, I implemented simple calculator that includes variables, assigments, simple arithmetics and simple error handling with five different languages. In this repository, you can find calculator.pl, calc.pl (since Prolog and Perl have same extension I named Prolog one as calc), calculator.rs, calculator.scm, calculator.adb and test_cases.txt for checking my calculators's accuracy. Below you can find expanations about implementation decisions, simple code structures, running and output of the program for each language. All calculators takes inline expressions, do not care about whitespaces and can both result and operate floating point numbers.
 
